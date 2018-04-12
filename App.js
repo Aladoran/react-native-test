@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import Login from './app/components/Login';
 import Profile from './app/components/Profile';
 
-const Application = StackNavigator({
+const Navigation = StackNavigator({
   Login: { screen: Login },
   Profile: {screen: Profile},
   }, {
@@ -17,7 +17,7 @@ const Application = StackNavigator({
 export default class App extends React.Component {
 
   render() {
-    return <Application />
+    return <Navigation />
   }
 }
 

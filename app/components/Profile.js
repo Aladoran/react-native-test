@@ -13,12 +13,22 @@ import Expo from 'expo';
 
 
 export default class Profile extends React.Component {
+    
+    static navigationOptions = {
+        title: 'Login',
+    }
 
     render() {
-        var title = AsyncStorage.getItem('username') + "s profile";
+
+        const { params } = this.props.navigation.state;
+        const username = params ? params.username: null;
+        const password = params ? params.password: null;
+
+        //Doesn't save name if app reloads.
+        
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.title}>{username}s Profile</Text>
             </View>
         );
     }
@@ -33,15 +43,25 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: Expo.Constants.statusBarHeight,
         backgroundColor: '#3d99cc',
+        paddingLeft: 40,
+        paddingRight: 40,
     },
     text: {
         color: '#fff',
     },
     title: {
-        color: '#fff',
         fontSize: 24,
+        marginBottom: 60,
+        color: '#fff',
+        fontWeight: 'bold',
         alignItems: 'center',
-        alignItems:'baseline',
-        marginTop: 10,
+    },
+    btn: {
+        alignSelf: 'stretch',
+        backgroundColor: '#9bffdd',
+        padding: 20,
+        alignItems: 'center',
+        borderRadius: 10,
+        marginBottom: 5,
     }
 });

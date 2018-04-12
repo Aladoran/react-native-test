@@ -14,6 +14,12 @@ import { StackNavigator } from 'react-navigation';
 
 export default class Login extends React.Component {
 
+
+    static navigationOptions = {
+        title: 'Login',
+    }
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -27,18 +33,17 @@ export default class Login extends React.Component {
 
 
 
-    // componentDidMount() {
-    //     this._loadInitialState().done();
-    // }
+    componentDidMount() {
+        this._loadInitialState().done();
+    }
 
-    // _loadInitialState = async () => {
+    _loadInitialState = async () => {
 
-    //     var value = await AsyncStorage.getItem('user');
-    //     if (value !== null) {
-    //         this.props.navigation.navigate('Profile');
-    //     }
-    // }
-
+        var value = await AsyncStorage.getItem('username');
+        if (value !== null) {
+            this.props.navigation.navigate('Profile');
+        }
+    }
 
 
     render() {
@@ -70,7 +75,7 @@ export default class Login extends React.Component {
         );
     }
 
-    getLoginUser = () =>{
+    login = () => {
 
         var users = require('../../users.json');
         var jUsers = JSON.stringify(users);
@@ -81,7 +86,7 @@ export default class Login extends React.Component {
             if(users[i].username === this.state.username){
                 if(users[i].username === this.state.username && users[i].password === this.state.password)
                 {
-                    this.props.navigation.navigate('Profile');
+                    this.props.navigation.navigate('Profile', {username: this.state.username, password: this.state.password});
                     AsyncStorage.setItem('username', this.state.username);
                     AsyncStorage.setItem('password', this.state.password);
                     return;
@@ -90,68 +95,6 @@ export default class Login extends React.Component {
             }
             else{alert("Wrong username or password"); return;}
         }
-    }
-
-    login = () => {
-
-        this.getLoginUser();
-        
-        
-        
-
-        // fetch('http://localhost:3000/api/users')
-        
-        // .then(response => {
-        //     console.log("success!!!");
-        //     console.log(response);
-        //     return response.json();
-        // })
-        // .catch(err => {
-        //     console.log("ERROR");
-        //     console.log(err);
-        // });
-        // fetch('localhost:3000/api/users', {
-        // method: 'GET',
-        // headers: {
-        //     'Accept': 'application/json',
-        //     'Content-Type': 'application/json',
-        // },
-        // body: JSON.stringify({
-        //     username: this.state.username,
-        //     password: this.state.password,
-        // })
-        // })
-
-        // .then((response) => response.json())
-        // .then((res) => {
-
-        //     if(res.success === true) {
-        //         AsyncStorage.setItem('user', res.user);
-        //         this.props.navigation.navigate('Profile');
-        //     }
-
-        //     else {
-        //         alert(res.message);
-        //     }
-        // })
-        // .done();
-
-
-
-        //________________________________________________________________________
-
-
-        // console.log("Username input: " + this.state.username);
-
-        // if (this.state.username === 'Admin' && this.state.password === "Pass") {
-        //     this.props.navigation.navigate('Profile');
-        // }
-        // else if (this.state.username !== 'Admin') {
-        //     alert('Username doesn\'t exist');
-        // }
-        // else {
-        //     alert('Password is incorrect');
-        // }
     }
 }
 
