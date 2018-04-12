@@ -9,15 +9,16 @@ import {
     AsyncStorage,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
+import Expo from 'expo';
 
 
 export default class Profile extends React.Component {
 
     render() {
+        var title = AsyncStorage.getItem('username') + "s profile";
         return (
             <View style={styles.container}>
-
-                <Text style={styles.text}> Welcome to the Member Area </Text>
+                <Text style={styles.title}>{title}</Text>
             </View>
         );
     }
@@ -30,11 +31,17 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#2896d3',
+        marginTop: Expo.Constants.statusBarHeight,
+        backgroundColor: '#3d99cc',
     },
     text: {
-        color: '#fff'
+        color: '#fff',
+    },
+    title: {
+        color: '#fff',
+        fontSize: 24,
+        alignItems: 'center',
+        alignItems:'baseline',
+        marginTop: 10,
     }
 });

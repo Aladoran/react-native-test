@@ -6,7 +6,8 @@ import Login from './app/components/Login';
 import Profile from './app/components/Profile';
 
 const Application = StackNavigator({
-  Home: { screen: Login },
+  Login: { screen: Login },
+  Profile: {screen: Profile},
   }, {
     navigationOptions: {
       header: false,

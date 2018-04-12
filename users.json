@@ -1,0 +1,23 @@
+[
+    {
+        "pictures": [],
+        "_id": "5acf1dd4c0dfbd07606111d9",
+        "username": "Admin",
+        "password": "Pass",
+        "__v": 0
+    },
+    {
+        "pictures": [],
+        "_id": "5acf1e19c0dfbd07606111da",
+        "username": "AntonH",
+        "password": "Pass",
+        "__v": 0
+    },
+    {
+        "pictures": [],
+        "_id": "5acf1e34c0dfbd07606111db",
+        "username": "JonasA",
+        "password": "Pass",
+        "__v": 0
+    }
+]
