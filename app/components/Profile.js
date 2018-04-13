@@ -14,6 +14,10 @@ import Expo from 'expo';
 // import { RNCamera } from 'react-native-camera';
 
 export default class Profile extends React.Component {
+    
+    static navigationOptions = {
+        title: 'Login',
+    }
 
     constructor(props) {
         super(props);
@@ -69,8 +73,16 @@ const styles = StyleSheet.create({
         color: '#fff',
     },
     title: {
-        color: '#fff',
         fontSize: 24,
+        marginBottom: 60,
+        color: '#fff',
+        fontWeight: 'bold',
+        alignItems: 'center',
+    },
+    btn: {
+        alignSelf: 'stretch',
+        backgroundColor: '#9bffdd',
+        padding: 20,
         alignItems: 'center',
         alignItems: 'baseline',
         marginTop: 10,
