@@ -7,6 +7,8 @@ import {
     KeyboardAvoidingView,
     TouchableOpacity,
     AsyncStorage,
+    Image,
+    InteractionManager,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -20,9 +22,6 @@ export default class Login extends React.Component {
             username: '',
             password: '',
         }
-
-        // AsyncStorage.setItem('username', this.state.username);
-        // AsyncStorage.setItem('password', this.state.password);
     }
 
 
@@ -33,7 +32,7 @@ export default class Login extends React.Component {
 
     // _loadInitialState = async () => {
 
-    //     var value = await AsyncStorage.getItem('user');
+    //     var value = await AsyncStorage.getItem('username');
     //     if (value !== null) {
     //         this.props.navigation.navigate('Profile');
     //     }
@@ -42,116 +41,78 @@ export default class Login extends React.Component {
 
 
     render() {
+        //Remove this on live, persons will only log out if they press "log out".
+        AsyncStorage.clear();
+
         return (
-            <KeyboardAvoidingView behavior='padding' style={styles.wrapper}>
+            <KeyboardAvoidingView behavior='padding' style={styles.container}>
 
-                <View style={styles.container}>
+                <View style={styles.logoContainer}>
 
-                    <Text style={styles.header}> LifeLiner </Text>
-
-                    <TextInput
-                        style={styles.textInput} placeholder='Username'
-                        onChangeText={(username) => this.setState({ username })}
-                        underlineColorAndroid='transparent' />
-
-                    <TextInput
-                        style={styles.textInput} placeholder='Password'
-                        onChangeText={(password) => this.setState({ password })}
-                        underlineColorAndroid='transparent' />
-
-
-                    <TouchableOpacity style={styles.btn}
-                        onPress={this.login}>
-                        <Text>Log in</Text>
-                    </TouchableOpacity>
+                    <Image
+                        style={styles.logo}
+                        source={require('./images/LL.png')} />
                 </View>
+                <Text style={styles.header}> LifeLiner </Text>
+
+                <TextInput
+                    style={styles.textInput} placeholder='Username'
+                    onChangeText={(username) => this.setState({ username })}
+                    underlineColorAndroid='transparent'
+                    returnKeyType="next"
+                    onSubmitEditing={() => this.passwordInput.focus()}
+                    autoCapitalize="none"
+                />
+
+                <TextInput
+                    style={styles.textInput} placeholder='Password'
+                    onChangeText={(password) => this.setState({ password })}
+                    underlineColorAndroid='transparent'
+                    secureTextEntry
+                    returnKeyType="go"
+                    autoCapitalize="none"
+                    ref={(textInput) => this.passwordInput = textInput}
+                    onSubmitEditing={() => this.login()} />
+
+                <TouchableOpacity style={styles.btn}
+                    onPress={this.login}>
+                    <Text style={styles.text}>Log in</Text>
+                </TouchableOpacity>
+
 
             </KeyboardAvoidingView>
         );
     }
 
-    getLoginUser = () =>{
+    getLoginUser = () => {
 
         var users = require('../../users.json');
         var jUsers = JSON.stringify(users);
-        
 
-        for (var i = 0; i < users.length; i++){
+        noUser = false;
 
-            if(users[i].username === this.state.username){
-                if(users[i].username === this.state.username && users[i].password === this.state.password)
-                {
-                    this.props.navigation.navigate('Profile');
+        for (var i = 0; i < users.length; i++) {
+
+            if (users[i].username === this.state.username) {
+                if (users[i].username === this.state.username && users[i].password === this.state.password) {
+                    
+                        this.props.navigation.navigate('Profile');
                     AsyncStorage.setItem('username', this.state.username);
                     AsyncStorage.setItem('password', this.state.password);
                     return;
                 }
-                else{alert("Wrong username or password"); return;}
+                else {noUser = true;}
             }
-            else{alert("Wrong username or password"); return;}
+            else {noUser = true;}
         }
+        if (noUser === true){
+        alert("Wrong username or password");
+    }
     }
 
     login = () => {
 
         this.getLoginUser();
-        
-        
-        
-
-        // fetch('http://localhost:3000/api/users')
-        
-        // .then(response => {
-        //     console.log("success!!!");
-        //     console.log(response);
-        //     return response.json();
-        // })
-        // .catch(err => {
-        //     console.log("ERROR");
-        //     console.log(err);
-        // });
-        // fetch('localhost:3000/api/users', {
-        // method: 'GET',
-        // headers: {
-        //     'Accept': 'application/json',
-        //     'Content-Type': 'application/json',
-        // },
-        // body: JSON.stringify({
-        //     username: this.state.username,
-        //     password: this.state.password,
-        // })
-        // })
-
-        // .then((response) => response.json())
-        // .then((res) => {
-
-        //     if(res.success === true) {
-        //         AsyncStorage.setItem('user', res.user);
-        //         this.props.navigation.navigate('Profile');
-        //     }
-
-        //     else {
-        //         alert(res.message);
-        //     }
-        // })
-        // .done();
-
-
-
-        //________________________________________________________________________
-
-
-        // console.log("Username input: " + this.state.username);
-
-        // if (this.state.username === 'Admin' && this.state.password === "Pass") {
-        //     this.props.navigation.navigate('Profile');
-        // }
-        // else if (this.state.username !== 'Admin') {
-        //     alert('Username doesn\'t exist');
-        // }
-        // else {
-        //     alert('Password is incorrect');
-        // }
     }
 }
 
@@ -166,9 +127,17 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#3d99cc',
+        backgroundColor: '#74b9ff',
         paddingLeft: 40,
         paddingRight: 40,
+    },
+    logo: {
+        width: 100,
+        height: 100,
+    },
+    logoContainer: {
+        alignItems: "center",
+        justifyContent: "center",
     },
     header: {
         fontSize: 24,
@@ -185,10 +154,13 @@ const styles = StyleSheet.create({
     },
     btn: {
         alignSelf: 'stretch',
-        backgroundColor: '#9bffdd',
+        backgroundColor: '#0984e3',
         padding: 20,
         alignItems: 'center',
         borderRadius: 10,
         marginBottom: 5,
-    }
+    },
+    text: {
+        color: '#fff',
+    },
 });

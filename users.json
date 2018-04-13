@@ -14,7 +14,18 @@
         "__v": 0
     },
     {
-        "pictures": [],
+        "pictures": [
+            {
+                "id": "1238162y12893vy1c2bc21",
+                "name": "picture1",
+                "hashString": "A098WDYA78WTDQ28YGDAODYGABWD892EGDHABWILAWDHA72D8AGWD12UY3V123KVK721V3BKASJG67VSSDV7AVVARADV6ADVO"
+            },
+            {
+                "id": "12v81bv6t1cx9183b2cbcc",
+                "name": "picture1",
+                "hashString": "A098WDYA78WTDQ28YGDAODYGABWD892EGDHABWILAWDHA72D8AGWD12UY3V123KVK721V3BKASJG67VSSDV7AVVARADV6ADVO"
+            }
+        ],
         "_id": "5acf1e34c0dfbd07606111db",
         "username": "JonasA",
         "password": "Pass",
