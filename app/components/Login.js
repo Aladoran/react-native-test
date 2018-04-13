@@ -16,6 +16,12 @@ import { StackNavigator } from 'react-navigation';
 
 export default class Login extends React.Component {
 
+
+    static navigationOptions = {
+        title: 'Login',
+    }
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -26,18 +32,21 @@ export default class Login extends React.Component {
 
 
 
-    // componentDidMount() {
-    //     this._loadInitialState().done();
-    // }
-
-    // _loadInitialState = async () => {
+    componentDidMount() {
+        this._loadInitialState().done();
+    }
 
     //     var value = await AsyncStorage.getItem('username');
     //     if (value !== null) {
     //         this.props.navigation.navigate('Profile');
     //     }
     // }
-
+    _loadInitialState(){
+        var value = await AsyncStorage.getItem('username');
+        if (value !== null) {
+            this.props.navigation.navigate('Profile');
+        }
+    }
 
 
     render() {
