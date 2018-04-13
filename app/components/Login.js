@@ -9,6 +9,7 @@ import {
     AsyncStorage,
     Image,
     InteractionManager,
+    Alert,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -41,11 +42,12 @@ export default class Login extends React.Component {
     //         this.props.navigation.navigate('Profile');
     //     }
     // }
-    _loadInitialState(){
-        var value = await AsyncStorage.getItem('username');
-        if (value !== null) {
-            this.props.navigation.navigate('Profile');
-        }
+    async _loadInitialState() {
+        value = await AsyncStorage.getItem('username')
+            
+                if (value !== null) {
+                    this.props.navigation.navigate('Profile');
+                };
     }
 
 
@@ -54,6 +56,7 @@ export default class Login extends React.Component {
         AsyncStorage.clear();
 
         return (
+        <View style={styles.wrapper}>
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
 
                 <View style={styles.logoContainer}>
@@ -88,8 +91,14 @@ export default class Login extends React.Component {
                     <Text style={styles.text}>Log in</Text>
                 </TouchableOpacity>
 
-
             </KeyboardAvoidingView>
+
+            <View style={styles.footer}>
+                <Text style={styles.copySmall}>LifeLiner &#169;2018 </Text>
+            </View>
+
+        </View>
+          
         );
     }
 
@@ -104,19 +113,19 @@ export default class Login extends React.Component {
 
             if (users[i].username === this.state.username) {
                 if (users[i].username === this.state.username && users[i].password === this.state.password) {
-                    
-                        this.props.navigation.navigate('Profile');
+
+                    this.props.navigation.navigate('Profile');
                     AsyncStorage.setItem('username', this.state.username);
                     AsyncStorage.setItem('password', this.state.password);
                     return;
                 }
-                else {noUser = true;}
+                else { noUser = true; }
             }
-            else {noUser = true;}
+            else { noUser = true; }
         }
-        if (noUser === true){
-        alert("Wrong username or password");
-    }
+        if (noUser === true) {
+            Alert.alert('Incorrect input', 'Wrong username or password');
+        }
     }
 
     login = () => {
@@ -171,5 +180,15 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#fff',
+    },
+    footer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#74b9ff',
+    },
+    copySmall: {
+        color: '#fff',
+        fontSize: 9,
+        marginBottom:10,
     },
 });

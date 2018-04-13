@@ -14,7 +14,7 @@ import Expo from 'expo';
 // import { RNCamera } from 'react-native-camera';
 
 export default class Profile extends React.Component {
-    
+
     static navigationOptions = {
         title: 'Login',
     }
@@ -27,14 +27,14 @@ export default class Profile extends React.Component {
     }
 
 
-    async setThisState(){
-            await AsyncStorage.getItem('username')
-                .then((username) => {
-                    this.setState({ "username": username });
+    async setThisState() {
+        await AsyncStorage.getItem('username')
+            .then((username) => {
+                this.setState({ "username": username });
             })
-                .catch((error) => {
-                    console.error(error);
-                  });
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
     render() {
@@ -43,18 +43,16 @@ export default class Profile extends React.Component {
         this.setThisState();
 
         return (
-            <View style={styles.container}>
+            <View style={styles.wrapper}>
                 <View style={styles.headerContainer}>
                     <Text style={styles.title}>{this.state.username}s Profile</Text>
+                </View>
 
-
+                <View style={styles.container}>
                 </View>
             </View>
         );
     }
-
-
-
 }
 
 
@@ -78,13 +76,13 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontWeight: 'bold',
         alignItems: 'center',
+        justifyContent: "center",
     },
     btn: {
         alignSelf: 'stretch',
         backgroundColor: '#9bffdd',
         padding: 20,
         alignItems: 'center',
-        alignItems: 'baseline',
         marginTop: 10,
     },
     view: {
