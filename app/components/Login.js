@@ -26,8 +26,8 @@ export default class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: '',
+            username: 'Admin',
+            password: 'Pass',
         }
     }
 
@@ -124,7 +124,10 @@ export default class Login extends React.Component {
             else { noUser = true; }
         }
         if (noUser === true) {
-            Alert.alert('Incorrect input', 'Wrong username or password');
+            //Alert.alert('Incorrect input', 'Wrong username or password');
+
+            //JUST FOR TESTING
+            this.props.navigate('Profile');
         }
     }
 

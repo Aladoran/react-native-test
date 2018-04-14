@@ -7,16 +7,17 @@ import {
     KeyboardAvoidingView,
     TouchableOpacity,
     AsyncStorage,
-    InteractionManager
+    InteractionManager,
+    Image,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Expo from 'expo';
-// import { RNCamera } from 'react-native-camera';
 
+// import { RNCamera } from 'react-native-camera';
 export default class Profile extends React.Component {
 
     static navigationOptions = {
-        title: 'Login',
+        title: 'Login'
     }
 
     constructor(props) {
@@ -45,18 +46,25 @@ export default class Profile extends React.Component {
         return (
             <View style={styles.wrapper}>
                 <View style={styles.headerContainer}>
-                    <Text style={styles.title}>{this.state.username}s Profile</Text>
+                    <TouchableOpacity onPress={this.toggleDropdown}><Text style={styles.headerTitle} >  &#9776;  </Text></TouchableOpacity>
+                    <Text style={styles.headerTitle}>LifeLiner</Text>
                 </View>
 
                 <View style={styles.container}>
+                    <View style={{ marginTop: 5 }}>
+                        <Text style={styles.text}>{this.state.username}s Profile</Text>
+                    </View>
+                    <Text style={styles.text}>asldjkjbnawdlkbawd</Text>
                 </View>
+
             </View>
         );
     }
 }
 
+function toggleDropdown(){
 
-
+}
 
 const styles = StyleSheet.create({
     wrapper: {
@@ -64,19 +72,29 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        marginTop: Expo.Constants.statusBarHeight,
         backgroundColor: '#74b9ff',
+    },
+    headerContainer: {
+        marginTop: Expo.Constants.statusBarHeight,
+        backgroundColor: "#0984e3",
+        flexDirection: 'row',
+        padding: 5,
     },
     text: {
         color: '#fff',
     },
-    title: {
+    headerTitle: {
         fontSize: 24,
-        marginBottom: 60,
-        color: '#fff',
         fontWeight: 'bold',
-        alignItems: 'center',
-        justifyContent: "center",
+        padding: 5,
+        color: "#FFF",
+    },
+    loggedIn: {
+        fontSize: 10,
+        fontWeight: 'bold',
+        padding: 5,
+        color: "#FFF",
+        alignSelf: "flex-end",
     },
     btn: {
         alignSelf: 'stretch',
@@ -97,5 +115,10 @@ const styles = StyleSheet.create({
         color: "red",
         padding: 15,
         margin: 45,
-    }
+    },
+    logo: {
+        width: 50,
+        height: 50,
+        alignSelf: "flex-end",
+    },
 });
