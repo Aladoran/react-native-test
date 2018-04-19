@@ -7,17 +7,26 @@ import {
     KeyboardAvoidingView,
     TouchableOpacity,
     AsyncStorage,
-    InteractionManager
+    InteractionManager,
+    Image,
+    Button,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Expo from 'expo';
-// import { RNCamera } from 'react-native-camera';
+import { ImagePicker } from 'expo';
 
 export default class Profile extends React.Component {
-    
+    state = {
+        image: null,
+    };
+
     static navigationOptions = {
-        title: 'Login',
+        title: 'Profile',
+        headerStyle: {
+            marginTop: Expo.Constants.statusBarHeight
+        }
     }
+
 
     constructor(props) {
         super(props);
@@ -26,36 +35,72 @@ export default class Profile extends React.Component {
         }
     }
 
+    componentWillMount(){
+        this.setThisState();
+    }
 
-    async setThisState(){
-            await AsyncStorage.getItem('username')
-                .then((username) => {
-                    this.setState({ "username": username });
+
+    async setThisState() {
+        await AsyncStorage.getItem('username')
+            .then((username) => {
+                this.setState({ "username": username });
             })
-                .catch((error) => {
-                    console.error(error);
-                  });
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
     render() {
-        //Fetches the username from the asyncStorage and sets this screens prop state to
-        //username.
-        this.setThisState();
+        let { image } = this.state;
 
         return (
-            <View style={styles.container}>
-                <View style={styles.headerContainer}>
+
+            <View style={styles.wrapper}>
+
+                <View style={styles.header}>
+                    <Image
+                        style={styles.logo}
+                        source={require('./images/LL.png')}
+                    />
+                    <Text style={styles.headerText}>LifeLiner</Text>
+                </View>
+
+                <View style={styles.container}>
                     <Text style={styles.title}>{this.state.username}s Profile</Text>
 
 
+                    <TouchableOpacity
+                        style={styles.btn}
+                        onPress={this._pickImage}
+                    >
+                        <Text style={styles.text}>Pick an image to upload.</Text>
+                    </TouchableOpacity>
+
+                    {image &&
+                        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+
                 </View>
             </View>
+
         );
     }
 
+    _pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [4, 3],
+        });
 
+        console.log(result);
 
+        if (!result.cancelled) {
+            this.setState({ image: result.uri });
+        }
+    };
 }
+
+
+
 
 
 
@@ -66,38 +111,47 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        marginTop: Expo.Constants.statusBarHeight,
         backgroundColor: '#74b9ff',
+        alignItems: "center",
+        paddingLeft: 40,
+        paddingRight: 40,
     },
     text: {
         color: '#fff',
     },
+    logo: {
+        width: 25,
+        height: 25,
+    },
     title: {
         fontSize: 24,
-        marginBottom: 60,
         color: '#fff',
         fontWeight: 'bold',
         alignItems: 'center',
+        alignSelf: 'center',
     },
+    header: {
+        backgroundColor: "#0984e3",
+        marginTop: Expo.Constants.statusBarHeight,
+        flexDirection: 'row',
+        padding: 3,
+    },
+    headerText: {
+        color: '#fff',
+        fontSize: 20,
+        fontWeight: "bold",
+    },
+
     btn: {
         alignSelf: 'stretch',
-        backgroundColor: '#9bffdd',
+        backgroundColor: '#0984e3',
         padding: 20,
         alignItems: 'center',
-        alignItems: 'baseline',
-        marginTop: 10,
-    },
-    view: {
-        flex: 1,
-        justifyContent: "flex-end",
-        alignItems: "center"
-    },
-    capture: {
-        flex: 0,
-        backgroundColor: "steelblue",
         borderRadius: 10,
-        color: "red",
-        padding: 15,
-        margin: 45,
-    }
+        marginTop: 20,
+        marginBottom: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        
+    },
 });

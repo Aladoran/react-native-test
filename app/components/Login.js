@@ -33,19 +33,14 @@ export default class Login extends React.Component {
 
 
     componentDidMount() {
-        this._loadInitialState().done();
+        // this._loadInitialState().done();
     }
 
-    //     var value = await AsyncStorage.getItem('username');
-    //     if (value !== null) {
-    //         this.props.navigation.navigate('Profile');
-    //     }
-    // }
-    _loadInitialState(){
-        var value = await AsyncStorage.getItem('username');
-        if (value !== null) {
-            this.props.navigation.navigate('Profile');
-        }
+    _loadInitialState() {
+        // var value = await AsyncStorage.getItem('username');
+        // if (value !== null) {
+        //     this.props.navigation.navigate('Profile');
+        // }
     }
 
 
@@ -88,6 +83,9 @@ export default class Login extends React.Component {
                     <Text style={styles.text}>Log in</Text>
                 </TouchableOpacity>
 
+                <View style={styles.footer}>
+                    <Text style={styles.footerText}>LifeLiner &#169;2018</Text>
+                </View>
 
             </KeyboardAvoidingView>
         );
@@ -102,21 +100,27 @@ export default class Login extends React.Component {
 
         for (var i = 0; i < users.length; i++) {
 
-            if (users[i].username === this.state.username) {
-                if (users[i].username === this.state.username && users[i].password === this.state.password) {
-                    
-                        this.props.navigation.navigate('Profile');
+            if (this.state.username === "" || users[i].username === this.state.username) {
+                if (this.state.password === "" || users[i].username === this.state.username && users[i].password === this.state.password) {
+
                     AsyncStorage.setItem('username', this.state.username);
                     AsyncStorage.setItem('password', this.state.password);
+
+                    if (this.state.username === "") {
+                        AsyncStorage.setItem('username', "Admin");
+                        AsyncStorage.setItem('password', "Pass");
+                    }
+
+                    this.props.navigation.navigate('Profile');
                     return;
                 }
-                else {noUser = true;}
+                else { noUser = true; }
             }
-            else {noUser = true;}
+            else { noUser = true; }
         }
-        if (noUser === true){
-        alert("Wrong username or password");
-    }
+        if (noUser === true) {
+            alert("Wrong username or password");
+        }
     }
 
     login = () => {
@@ -171,5 +175,18 @@ const styles = StyleSheet.create({
     },
     text: {
         color: '#fff',
+    },
+    footer: {
+        alignSelf: "center",
+        alignItems: "center",
+        position: "absolute",
+        left: 0,
+        right: 0,
+        bottom: 0,
+    },
+    footerText: {
+        color: "#fff",
+        fontSize: 10,
+        marginBottom: 15,
     },
 });
