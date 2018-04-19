@@ -9,6 +9,7 @@ import {
     AsyncStorage,
     Image,
     InteractionManager,
+    Alert,
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
@@ -25,8 +26,8 @@ export default class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
-            password: '',
+            username: 'Admin',
+            password: 'Pass',
         }
     }
 
@@ -49,6 +50,7 @@ export default class Login extends React.Component {
         AsyncStorage.clear();
 
         return (
+        <View style={styles.wrapper}>
             <KeyboardAvoidingView behavior='padding' style={styles.container}>
 
                 <View style={styles.logoContainer}>
@@ -88,6 +90,9 @@ export default class Login extends React.Component {
                 </View>
 
             </KeyboardAvoidingView>
+
+        </View>
+          
         );
     }
 

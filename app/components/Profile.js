@@ -15,6 +15,7 @@ import { StackNavigator } from 'react-navigation';
 import Expo from 'expo';
 import { ImagePicker } from 'expo';
 
+// import { RNCamera } from 'react-native-camera';
 export default class Profile extends React.Component {
     state = {
         image: null,
@@ -80,6 +81,7 @@ export default class Profile extends React.Component {
                         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
 
                 </View>
+
             </View>
 
         );
@@ -99,8 +101,9 @@ export default class Profile extends React.Component {
     };
 }
 
+function toggleDropdown(){
 
-
+}
 
 
 
@@ -115,6 +118,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingLeft: 40,
         paddingRight: 40,
+    },
+    headerContainer: {
+        marginTop: Expo.Constants.statusBarHeight,
+        backgroundColor: "#0984e3",
+        flexDirection: 'row',
+        padding: 5,
     },
     text: {
         color: '#fff',
