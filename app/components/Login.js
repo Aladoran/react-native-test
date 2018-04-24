@@ -50,56 +50,55 @@ export default class Login extends React.Component {
         AsyncStorage.clear();
 
         return (
-        <View style={styles.wrapper}>
-            <KeyboardAvoidingView behavior='padding' style={styles.container}>
+            <View style={styles.wrapper}>
+                <KeyboardAvoidingView behavior='padding' style={styles.container}>
 
-                <View style={styles.logoContainer}>
+                    <View style={styles.logoContainer}>
 
-                    <Image
-                        style={styles.logo}
-                        source={require('./images/LL.png')} />
-                </View>
-                <Text style={styles.header}> LifeLiner </Text>
+                        <Image
+                            style={styles.logo}
+                            source={require('./images/LL.png')} />
+                    </View>
+                    <Text style={styles.header}> LifeLiner </Text>
 
-                <TextInput
-                    style={styles.textInput} placeholder='Username'
-                    onChangeText={(username) => this.setState({ username })}
-                    underlineColorAndroid='transparent'
-                    returnKeyType="next"
-                    onSubmitEditing={() => this.passwordInput.focus()}
-                    autoCapitalize="none"
-                />
+                    <TextInput
+                        style={styles.textInput} placeholder='Username'
+                        onChangeText={(username) => this.setState({ username })}
+                        underlineColorAndroid='transparent'
+                        returnKeyType="next"
+                        onSubmitEditing={() => this.passwordInput.focus()}
+                        autoCapitalize="none"
+                    />
 
-                <TextInput
-                    style={styles.textInput} placeholder='Password'
-                    onChangeText={(password) => this.setState({ password })}
-                    underlineColorAndroid='transparent'
-                    secureTextEntry
-                    returnKeyType="go"
-                    autoCapitalize="none"
-                    ref={(textInput) => this.passwordInput = textInput}
-                    onSubmitEditing={() => this.login()} />
+                    <TextInput
+                        style={styles.textInput} placeholder='Password'
+                        onChangeText={(password) => this.setState({ password })}
+                        underlineColorAndroid='transparent'
+                        secureTextEntry
+                        returnKeyType="go"
+                        autoCapitalize="none"
+                        ref={(textInput) => this.passwordInput = textInput}
+                        onSubmitEditing={() => this.login()} />
 
-                <TouchableOpacity style={styles.btn}
-                    onPress={this.login}>
-                    <Text style={styles.text}>Log in</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity style={styles.btn}
+                        onPress={this.login}>
+                        <Text style={styles.text}>Log in</Text>
+                    </TouchableOpacity>
 
-                <View style={styles.footer}>
-                    <Text style={styles.footerText}>LifeLiner &#169;2018</Text>
-                </View>
+                    <View style={styles.footer}>
+                        <Text style={styles.footerText}>LifeLiner &#169;2018</Text>
+                    </View>
 
-            </KeyboardAvoidingView>
+                </KeyboardAvoidingView>
 
-        </View>
-          
+            </View>
+
         );
     }
 
-    getLoginUser = () => {
+    getLoginUser = async () => {
 
         var users = require('../../users.json');
-        var jUsers = JSON.stringify(users);
 
         noUser = false;
 
@@ -129,10 +128,22 @@ export default class Login extends React.Component {
     }
 
     login = () => {
-
         this.getLoginUser();
     }
+
+    // getLoginUser = () => {
+    //     return fetch('https://facebook.github.io/react-native/movies.json')
+    //         .then((response) => response.json())
+    //         .then((responseJson) => {
+    //             return responseJson.movies;
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // }
 }
+
+
 
 
 

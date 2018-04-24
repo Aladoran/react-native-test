@@ -1,6 +1,13 @@
 [
     {
-        "pictures": [],
+        "pictures": [
+            {
+                "uri": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Freact-test-2ce06195-95e0-4257-a32e-8d0289e97c71/ImagePicker/ce2845d3-c348-43a5-b491-51f70d846064.jpg"
+             },
+            {
+                "uri": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Freact-test-2ce06195-95e0-4257-a32e-8d0289e97c71/ImagePicker/42b4cfb8-cbc4-4460-9a50-77936784ea0b.jpg"
+            }
+        ],
         "_id": "5acf1dd4c0dfbd07606111d9",
         "username": "Admin",
         "password": "Pass",
@@ -16,14 +23,10 @@
     {
         "pictures": [
             {
-                "id": "1238162y12893vy1c2bc21",
-                "name": "picture1",
-                "hashString": "A098WDYA78WTDQ28YGDAODYGABWD892EGDHABWILAWDHA72D8AGWD12UY3V123KVK721V3BKASJG67VSSDV7AVVARADV6ADVO"
-            },
+                "uri": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Freact-test-2ce06195-95e0-4257-a32e-8d0289e97c71/ImagePicker/ce2845d3-c348-43a5-b491-51f70d846064.jpg"
+             },
             {
-                "id": "12v81bv6t1cx9183b2cbcc",
-                "name": "picture1",
-                "hashString": "A098WDYA78WTDQ28YGDAODYGABWD892EGDHABWILAWDHA72D8AGWD12UY3V123KVK721V3BKASJG67VSSDV7AVVARADV6ADVO"
+                "uri": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Freact-test-2ce06195-95e0-4257-a32e-8d0289e97c71/ImagePicker/42b4cfb8-cbc4-4460-9a50-77936784ea0b.jpg"
             }
         ],
         "_id": "5acf1e34c0dfbd07606111db",
